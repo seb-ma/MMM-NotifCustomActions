@@ -1,0 +1,8 @@
+{
+  "name": "mmm-notif-custom-actions",
+  "version": "1.0.0",
+  "description": "Do custom actions when catching broadcast notifications",
+  "main": "MMM-NotifCustomActions.js",
+  "author": "Sébastien Mazzon",
+  "license": "MIT"
+}
