@@ -6,22 +6,32 @@ It is a technical module designed to do the glue between modules or do simple js
 
 It reacts on module notifications.
 
+For exemple, it can send a specific notification to a module or execute a shell command when another module broadcast a notification.
+
 ## Using the module
 
 To use this module, add the following configuration block to the modules array in the `config/config.js` file:
 ```js
 var config = {
-    modules: [
-        {
-            module: 'MMM-NotifCustomActions',
-            config: {
-        		actions: [
-                    // See below for detail
-                ],
-            }
-        }
-    ]
+	modules: [
+		{
+			module: 'MMM-NotifCustomActions',
+			config: {
+				actions: [
+					// See below for detail
+				],
+			}
+		}
+	]
 }
+```
+## Installation
+
+```sh
+cd ~/MagicMirror/modules # Change path to modules directory of to your actual MagiMirror² installation
+git clone https://github.com/seb-ma/MMM-NotifCustomActions
+cd MMM-NotifCustomActions
+npm install --only=production
 ```
 
 ## Configuration options
@@ -33,13 +43,13 @@ var config = {
 `actions` is a list of:
 ```js
 {
-    notification: "RECEIVED_NOTIFICATION", // Notification to observe
-    sender: "sender_name" // (optional) Sender of the notification to observe
-    action_node: function(sender, payload) {
-        /* code executed on node side */
-    },
-    action_module: function(sender, payload) {
-        /* code executed on client side */
+	notification: "RECEIVED_NOTIFICATION", // Notification to observe
+	sender: "sender_name" // (optional) Sender of the notification to observe
+	action_node: function(sender, payload) {
+		/* code executed on node side */
+	},
+	action_module: function(sender, payload) {
+		/* code executed on client side */
 },
 ```
 
@@ -61,19 +71,24 @@ var config = {
 - `this` of module can be accessed by keyword `self` (allowing for exemple `self.sendNotification` call)
 
 ## Exemple of configuration
+
+This exemple do:
+- a `shutdown` command when notification `ACTION_SHUTDOWN` is received.
+- a sent of notification `PAGE_SELECT` with paylod `"musicPage"` when notification `SPOTIFY_CONNECTED` is received.
+
 ```js
 actions: [
-    {
-        notification: "ACTION_SHUTDOWN",
-        action_node: function(sender, payload) {
-            exec("sudo shutdown -h now");
-        }
-    },
-    {
-        notification: "SPOTIFY_CONNECTED",
-        action_module: function(sender, payload) {
-            self.sendNotification("PAGE_SELECT", "musicPage");
-        }
-    },
+	{
+		notification: "ACTION_SHUTDOWN",
+		action_node: function(sender, payload) {
+			exec("sudo shutdown -h now");
+		}
+	},
+	{
+		notification: "SPOTIFY_CONNECTED",
+		action_module: function(sender, payload) {
+			self.sendNotification("PAGE_SELECT", "musicPage");
+		}
+	},
 ]
 ```
