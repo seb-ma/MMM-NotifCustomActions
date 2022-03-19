@@ -41,6 +41,7 @@ npm install --only=production
 | `actions`        | *Required* Notifications action <br><br>**Type:** `array` See below for content
 
 `actions` is a list of:
+
 ```js
 {
 	notification: "RECEIVED_NOTIFICATION", // Notification to observe
@@ -74,7 +75,7 @@ npm install --only=production
 
 This exemple do:
 - a `shutdown` command when notification `ACTION_SHUTDOWN` is received.
-- a sent of notification `PAGE_SELECT` with paylod `"musicPage"` when notification `SPOTIFY_CONNECTED` is received.
+- a sent of notification `PAGE_SELECT` with payload `"musicPage"` when notification `SPOTIFY_CONNECTED` is received.
 
 ```js
 actions: [
