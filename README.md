@@ -6,7 +6,7 @@ It is a technical module designed to do the glue between modules or do simple js
 
 It reacts on module notifications.
 
-For exemple, it can send a specific notification to a module or execute a shell command when another module broadcast a notification.
+For example, it can send a specific notification to a module or execute a shell command when another module broadcast a notification.
 
 ## Using the module
 
@@ -69,11 +69,11 @@ npm install --only=production
 ## Function content for action_module
 
 - All standard JS can be used.
-- `this` of module can be accessed by keyword `self` (allowing for exemple `self.sendNotification` call)
+- `this` of module can be accessed by keyword `self` (allowing for example `self.sendNotification` call)
 
-## Exemple of configuration
+## Example of configuration
 
-This exemple do:
+This example do:
 - a `shutdown` command when notification `ACTION_SHUTDOWN` is received.
 - a sent of notification `PAGE_SELECT` with payload `"musicPage"` when notification `SPOTIFY_CONNECTED` is received.
 
