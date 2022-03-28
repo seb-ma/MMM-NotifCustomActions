@@ -19,14 +19,14 @@ const util = require("util");
 
 module.exports = NodeHelper.create({
 
-	socketNotificationReceived: function(notification, payload) {
+	socketNotificationReceived: function (notification, payload) {
 		self = this;
 		if (notification === "DO_ACTION") {
 			Log.info(payload);
 
 			// Tricky part to execute (eval) action (declared function) in module context (call(this, ...))
 			const strAction = '(' + payload.action + ')';
-			return function(sender, payload) {return eval(strAction)(sender, payload); }
+			return function (sender, payload) { return eval(strAction)(sender, payload); }
 				.call(this, payload.sender, payload.payload);
 		}
 	},

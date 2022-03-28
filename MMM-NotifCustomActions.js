@@ -12,7 +12,7 @@ Module.register("MMM-NotifCustomActions", {
 	},
 	modules_loaded: false,
 
-	start: function() {
+	start: function () {
 		this.modules_loaded = true;
 	},
 
@@ -20,12 +20,12 @@ Module.register("MMM-NotifCustomActions", {
 		if (this.modules_loaded) {
 			self = this;
 			const actionsModule = this.config.actions.filter(actionModule => actionModule.notification === notification
-															&& (typeof actionModule.sender === 'undefined' || actionModule.sender === sender.name));
+				&& (typeof actionModule.sender === 'undefined' || actionModule.sender === sender.name));
 
 			for (const actionModule of actionsModule) {
 				if (typeof actionModule.action_node === 'function') {
 					// Node actions
-					this.sendSocketNotification("DO_ACTION", {action: actionModule.action_node.toString(), notification: notification, payload: payload, sender: sender.name});
+					this.sendSocketNotification("DO_ACTION", { action: actionModule.action_node.toString(), notification: notification, payload: payload, sender: sender.name });
 				}
 
 				if (typeof actionModule.action_module === 'function') {

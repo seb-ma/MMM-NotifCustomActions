@@ -11,6 +11,7 @@ For example, it can send a specific notification to a module or execute a shell 
 ## Using the module
 
 To use this module, add the following configuration block to the modules array in the `config/config.js` file:
+
 ```js
 var config = {
 	modules: [
@@ -25,6 +26,7 @@ var config = {
 	]
 }
 ```
+
 ## Installation
 
 ```sh
