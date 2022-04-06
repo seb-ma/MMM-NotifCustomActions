@@ -16,7 +16,7 @@ To use this module, add the following configuration block to the modules array i
 var config = {
 	modules: [
 		{
-			module: 'MMM-NotifCustomActions',
+			module: "MMM-NotifCustomActions",
 			config: {
 				actions: [
 					// See below for detail
