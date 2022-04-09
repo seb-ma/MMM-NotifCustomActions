@@ -30,7 +30,7 @@ var config = {
 ## Installation
 
 ```sh
-cd ~/MagicMirror/modules # Change path to modules directory of to your actual MagiMirror² installation
+cd ~/MagicMirror/modules # Change path to modules directory of your actual MagiMirror² installation
 git clone https://github.com/seb-ma/MMM-NotifCustomActions
 cd MMM-NotifCustomActions
 npm install --only=production
@@ -40,7 +40,7 @@ npm install --only=production
 
 | Option           | Description
 |----------------- |-----------
-| `actions`        | *Required* Notifications action <br><br>**Type:** `array` See below for content
+| `actions`        | *Required* Notifications action<br><br>**Type:** `array` See below for content
 
 `actions` is a list of:
 
