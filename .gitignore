@@ -1,2 +1,6 @@
 node_modules
 /package-lock.json
+
+# User files that can optionnaly be loaded by module
+#user_node.js
+#user_client.js

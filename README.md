@@ -22,10 +22,20 @@ var config = {
 					// See below for detail
 				],
 			}
-		}
+		},
 	]
 }
 ```
+
+### Advanced usage
+
+A JavaScript file can be loaded on node side or on client side to be used in actions.
+This files must be located in `MMM-NotifCustomActions` directory and must be named:
+
+- `user_node.js` for the file loaded by node
+  - it is loaded and accessible in global variable `user`
+- `user_client.js` for the file loaded by browser
+  - it is loaded as a standard js script
 
 ## Installation
 
@@ -38,9 +48,9 @@ npm install --only=production
 
 ## Configuration options
 
-| Option           | Description
-|----------------- |-----------
-| `actions`        | *Required* Notifications action<br><br>**Type:** `array` See below for content
+| Option	| Description
+|---------- |-------------
+| `actions`	| *Required* Notifications action<br><br>**Type:** `array` See below for content
 
 `actions` is a list of:
 
@@ -48,17 +58,18 @@ npm install --only=production
 {
 	notification: "RECEIVED_NOTIFICATION", // Notification to observe
 	sender: "sender_name" // (optional) Sender of the notification to observe
-	action_node: function(sender, payload) {
+	action_node: function(self, sender, payload) { // May not be defined if there is no action to execute on node side
 		/* code executed on node side */
 	},
-	action_module: function(sender, payload) {
+	action_client: function(self, sender, payload) { // May not be defined if there is no action to execute on client side
 		/* code executed on client side */
+	},
 },
 ```
 
 ## Function content for action_node
 
-- All standard JS can be used.
+- All standard JavaScript can be used.
 - `this` of NodeJs can be accessed by keyword `self`
 - Some librairies are accessible:
   - `exec` (`child_process.exec`)
@@ -67,11 +78,14 @@ npm install --only=production
   - `path`
   - `url`
   - `util`
+- Special user script is accessible (if `user_node.js` exists):
+  - `user`
 
-## Function content for action_module
+## Function content for action_client
 
-- All standard JS can be used.
+- All standard JavaScript can be used.
 - `this` of module can be accessed by keyword `self` (allowing for example `self.sendNotification` call)
+- content of `user_client.js` file (if exists)
 
 ## Example of configuration
 
@@ -83,13 +97,13 @@ This example do:
 actions: [
 	{
 		notification: "ACTION_SHUTDOWN",
-		action_node: function(sender, payload) {
+		action_node: function(self, sender, payload) {
 			exec("sudo shutdown -h now");
 		}
 	},
 	{
 		notification: "SPOTIFY_CONNECTED",
-		action_module: function(sender, payload) {
+		action_client: function(self, sender, payload) {
 			self.sendNotification("PAGE_SELECT", "musicPage");
 		}
 	},
