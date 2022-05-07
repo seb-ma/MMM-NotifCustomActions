@@ -1,16 +1,16 @@
 {
-  "name": "mmm-notif-custom-actions",
-  "version": "1.0.0",
-  "description": "This is a MagicMirror² module designed to do the glue between modules or do simple js function.",
-  "main": "MMM-NotifCustomActions.js",
-  "author": "Sébastien Mazzon",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/seb-ma/MMM-NotifCustomActions"
-  },
-  "keywords": [
-    "magicmirror-module",
-    "magicmirror2"
-  ]
+	"name": "mmm-notif-custom-actions",
+	"version": "1.0.0",
+	"description": "This is a MagicMirror² module designed to do the glue between modules or do simple js function.",
+	"main": "MMM-NotifCustomActions.js",
+	"author": "Sébastien Mazzon",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/seb-ma/MMM-NotifCustomActions"
+	},
+	"keywords": [
+		"magicmirror-module",
+		"magicmirror2"
+	]
 }
