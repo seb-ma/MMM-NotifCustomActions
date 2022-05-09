@@ -69,7 +69,7 @@ Module.register("MMM-NotifCustomActions", {
 			const self = this;
 			// Find actions linked to received notification (sender is optional)
 			const actionsModule = this.config.actions.filter(actionModule => actionModule.notification === notification
-				&& (typeof actionModule.sender === 'undefined' || actionModule.sender === sender.name));
+				&& (typeof actionModule.sender === 'undefined' || actionModule.sender === sender?.name));
 
 			for (const actionModule of actionsModule) {
 				if (typeof actionModule.action_node === 'function') {
@@ -80,7 +80,7 @@ Module.register("MMM-NotifCustomActions", {
 				if (typeof actionModule.action_client === 'function') {
 					// Execute client action
 					Log.debug(payload);
-					actionModule.action_client(self, sender.name, payload);
+					actionModule.action_client(self, sender?.name, payload);
 				}
 			}
 		}
