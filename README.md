@@ -43,7 +43,7 @@ This files must be located in `MMM-NotifCustomActions` directory and must be nam
 cd ~/MagicMirror/modules # Change path to modules directory of your actual MagiMirror² installation
 git clone https://github.com/seb-ma/MMM-NotifCustomActions
 cd MMM-NotifCustomActions
-npm install --only=production
+npm install --no-audit --no-fund --no-update-notifier --only=prod --omit=dev
 ```
 
 ## Configuration options
