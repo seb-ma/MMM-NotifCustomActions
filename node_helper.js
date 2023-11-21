@@ -10,6 +10,7 @@
 
 const NodeHelper = require("node_helper");
 const Log = require("logger");
+const BodyParser = require("body-parser");
 
 // Convenient libraries to be used by actions
 const exec = require("child_process").exec;
@@ -43,6 +44,23 @@ module.exports = NodeHelper.create({
 			// No user script
 			Log.log("No user script to load");
 		}
+
+		const self = this;
+		this.expressApp.use(BodyParser.urlencoded({ extended: true }));
+		// Allows to run action from url call using GET
+		this.expressApp.get("/action/:notif", function (req, res) {
+			const payload = { notification: req.params.notif, params: req.query };
+			Log.info("Forward notification", payload);
+			self.sendSocketNotification("NOTIFICATION_FROM_URL", payload);
+			res.sendStatus(200);
+		});
+		// Allows to run action from url call using POST
+		this.expressApp.post("/action/:notif", function (req, res) {
+			const payload = { notification: req.params.notif, params: req.body };
+			Log.info("Forward notification", payload);
+			self.sendSocketNotification("NOTIFICATION_FROM_URL", payload);
+			res.sendStatus(200);
+		})
 	},
 
 	/**
@@ -54,7 +72,9 @@ module.exports = NodeHelper.create({
 	 */
 	socketNotificationReceived: function (notification, payload) {
 		const self = this;
-		if (notification === "DO_ACTION") {
+		if (notification === "INIT") {
+			// Nothing to do - this notification is only sent to establish socket connection
+		} else if (notification === "DO_ACTION") {
 			// Action to execute on node side - payload is {sender, action, payload}
 			Log.info(payload);
 

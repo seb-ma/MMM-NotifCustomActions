@@ -31,6 +31,8 @@ Module.register("MMM-NotifCustomActions", {
 	 * @see <https://docs.magicmirror.builders/development/core-module-file.html#start>
 	 */
 	start: function () {
+		// Initializes socket connection
+		this.sendSocketNotification("INIT");
 		// All modules are initialized
 		this.modules_loaded = true;
 	},
@@ -82,6 +84,28 @@ Module.register("MMM-NotifCustomActions", {
 					Log.debug(payload);
 					actionModule.action_client(self, sender?.name, payload);
 				}
+			}
+		}
+	},
+
+	/**
+	 * Called when a socket notification arrives.
+	 * @see `module.socketNotificationReceived`
+	 * @see <https://docs.magicmirror.builders/development/core-module-file.html?#socketnotificationreceived-function-notification-payload>
+	 * @param {string} notification The identifier of the notification.
+	 * @param {*} payload The payload of the notification.
+	 */
+	socketNotificationReceived: function (notification, payload) {
+		if (notification === "NOTIFICATION_FROM_URL") {
+			// Find actions linked to received notification (sender is optional)
+			const actionsModule = this.config.actions.filter(actionModule => actionModule.notification === payload.notification
+				&& (typeof actionModule.sender === 'undefined' || actionModule.sender === this.name));
+			// If the notification is declared
+			if (actionsModule.length > 0) {
+				// Relay notification to other modules
+				this.sendNotification(payload.notification, payload.params);
+				// Process own notification
+				this.notificationReceived(payload.notification, payload.params, this);
 			}
 		}
 	},

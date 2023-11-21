@@ -8,6 +8,9 @@ It reacts on module notifications.
 
 For example, it can send a specific notification to a module or execute a shell command when another module broadcast a notification.
 
+It can also call action from a URL call (GET or POST) using: `https://<host-magicmirror>/action/<notification-from-list>`.
+See examples below.
+
 ## Using the module
 
 To use this module, add the following configuration block to the modules array in the `config/config.js` file:
@@ -96,15 +99,27 @@ This example do:
 ```js
 actions: [
 	{
+		// Can be called by URL .../action/ACTION_SHUTDOWN or triggered by a notification ACTION_SHUTDOWN
 		notification: "ACTION_SHUTDOWN",
 		action_node: function(self, sender, payload) {
 			exec("sudo shutdown -h now");
 		}
 	},
 	{
+		// Can be called by URL .../action/SPOTIFY_CONNECTED or triggered by a notification ACTION_SHUTDOWN
 		notification: "SPOTIFY_CONNECTED",
 		action_client: function(self, sender, payload) {
 			self.sendNotification("PAGE_SELECT", "musicPage");
+		}
+	},
+	{
+		// Can be called by URL:
+		// - as GET request - ex: https://localhost:8080/action/showPage?page=mainPage&delay=1000
+		// - as POST request - ex: https://localhost:8080/action/showPage with JSON content in body { page: mainPage, delay: 1000 } 
+		// Can be triggered by notification - ex: this.sendNotification("PAGE_SELECT" { page: mainPage, delay: 1000 });
+		notification: "showPage",
+		action_client: function(self, sender, payload) { // payload = { page: mainPage, delay: 1000 }
+			self.sendNotification("PAGE_SELECT", payload);
 		}
 	},
 ]
