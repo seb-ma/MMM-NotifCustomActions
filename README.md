@@ -114,8 +114,8 @@ actions: [
 	},
 	{
 		// Can be called by URL:
-		// - as GET request - ex: https://localhost:8080/action/showPage?page=mainPage&delay=1000
-		// - as POST request - ex: https://localhost:8080/action/showPage with JSON content in body { page: mainPage, delay: 1000 } 
+		// - as GET request - ex: http://localhost:8080/action/showPage?page=mainPage&delay=1000
+		// - as POST request - ex: http://localhost:8080/action/showPage with JSON content in body { page: mainPage, delay: 1000 } 
 		// Can be triggered by notification - ex: this.sendNotification("PAGE_SELECT" { page: mainPage, delay: 1000 });
 		notification: "showPage",
 		action_client: function(self, sender, payload) { // payload = { page: mainPage, delay: 1000 }
