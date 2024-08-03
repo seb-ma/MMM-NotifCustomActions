@@ -49,7 +49,7 @@ Module.register("MMM-NotifCustomActions", {
 				.catch(e => false);
 
 		// User script to load (if exists)
-		const userScript = this.file("user_client.js");
+		const userScript = "/config/user_client.js";
 		let isExisting;
 		(async () => {
 			isExisting = await fileExists(userScript);

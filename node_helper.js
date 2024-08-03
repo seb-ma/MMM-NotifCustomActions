@@ -35,7 +35,7 @@ module.exports = NodeHelper.create({
 	 */
 	start: function () {
 		// User script to load (if exists)
-		const userScript = `${this.path}/user_node.js`;
+		const userScript = `${this.path}/../../config/user_node.js`;
 		if (fs.existsSync(userScript)) {
 			// Load user file
 			user = require(userScript);

@@ -33,7 +33,7 @@ var config = {
 ### Advanced usage
 
 A JavaScript file can be loaded on node side or on client side to be used in actions.
-This files must be located in `MMM-NotifCustomActions` directory and must be named:
+This files must be located in `config` directory and must be named:
 
 - `user_node.js` for the file loaded by node
   - it is loaded and accessible in global variable `user`
